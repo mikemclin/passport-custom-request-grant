@@ -17,3 +17,38 @@ Install with composer...  `composer require mikemclin/passport-custom-request-gr
 * The POST body should contain `grant_type` = `custom_request`.
 * The request will get routed to your `User::getUserEntityByRequest()` function, where you will determine if access should be granted or not.
 * An `access_token` and `refresh_token` will be returned if successful.
+
+### Example
+
+Here is what a `User::byPassportCustomRequest()` method might look like...
+
+```php
+/**
+ * Verify and retrieve user by custom token request.
+ *
+ * @param \Illuminate\Http\Request $request
+ *
+ * @return \Illuminate\Database\Eloquent\Model|null
+ * @throws \League\OAuth2\Server\Exception\OAuthServerException
+ */
+public function byPassportCustomRequest(Request $request)
+{
+    try {
+        if ($request->json('ssoToken')) {
+            return $this->bySsoToken($request->json('ssoToken'));
+        }
+    } catch (\Exception $e) {
+        throw OAuthServerException::serverError($e->getMessage());
+    }
+    return null;
+}
+```
+
+In this example, the app is able to authenticate a user based on an `ssoToken` property from a submitted JSON payload.  The `bySsoToken` is this app's way of doing that.  It will return `null` or a user object.  It also might throw exceptions explaining why the token is invalid.  The `byPassportCustomRequest` catches any of those exceptions and converts them to appropriate OAuth exception type.  If an `ssoToken` is not present on the request payload, then we return `null` which returns an **invalid_credentials** error response:
+
+```json
+{
+  "error": "invalid_credentials",
+  "message": "The user credentials were incorrect."
+}
+```
