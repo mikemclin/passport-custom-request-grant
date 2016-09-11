@@ -1,0 +1,20 @@
+{
+    "name": "mikemclin/passport-custom-request-grant",
+    "description": "Custom Request Grant for Laravel Passport",
+    "license": "MIT",
+    "keywords": ["laravel", "lumen", "passport", "oauth", "grant"],
+    "authors": [
+        {
+            "name": "Mike McLin",
+            "email": "mclinmike@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "MikeMcLin\\Passport\\": "src"
+        }
+    },
+    "require": {
+        "laravel/passport": "^1.0"
+    }
+}
