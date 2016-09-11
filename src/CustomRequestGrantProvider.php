@@ -14,7 +14,7 @@ use League\OAuth2\Server\Grant\PasswordGrant;
  *
  * @package App\Providers
  */
-class CustomRequestPassportGrantProvider extends PassportServiceProvider
+class CustomRequestGrantProvider extends PassportServiceProvider
 {
     /**
      * Bootstrap any application services.
