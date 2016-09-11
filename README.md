@@ -34,8 +34,8 @@ Here is what a `User::byPassportCustomRequest()` method might look like...
 public function byPassportCustomRequest(Request $request)
 {
     try {
-        if ($request->json('ssoToken')) {
-            return $this->bySsoToken($request->json('ssoToken'));
+        if ($request->get('sso_token')) {
+            return $this->bySsoToken($request->get('sso_token'));
         }
     } catch (\Exception $e) {
         throw OAuthServerException::serverError($e->getMessage());
@@ -44,7 +44,7 @@ public function byPassportCustomRequest(Request $request)
 }
 ```
 
-In this example, the app is able to authenticate a user based on an `ssoToken` property from a submitted JSON payload.  The `bySsoToken` is this app's way of doing that.  It will return `null` or a user object.  It also might throw exceptions explaining why the token is invalid.  The `byPassportCustomRequest` catches any of those exceptions and converts them to appropriate OAuth exception type.  If an `ssoToken` is not present on the request payload, then we return `null` which returns an **invalid_credentials** error response:
+In this example, the app is able to authenticate a user based on an `sso_token` property from a submitted JSON payload.  The `bySsoToken` is this app's way of doing that.  It will return `null` or a user object.  It also might throw exceptions explaining why the token is invalid.  The `byPassportCustomRequest` catches any of those exceptions and converts them to appropriate OAuth exception type.  If an `ssoToken` is not present on the request payload, then we return `null` which returns an **invalid_credentials** error response:
 
 ```json
 {
