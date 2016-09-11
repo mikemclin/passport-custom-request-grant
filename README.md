@@ -38,7 +38,7 @@ public function byPassportCustomRequest(Request $request)
             return $this->bySsoToken($request->get('sso_token'));
         }
     } catch (\Exception $e) {
-        throw OAuthServerException::serverError($e->getMessage());
+        throw OAuthServerException::accessDenied($e->getMessage());
     }
     return null;
 }
