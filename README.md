@@ -2,6 +2,11 @@
 
 Install with composer...  `composer require mikemclin/passport-custom-request-grant`
 
+### Versions
+
+* Laravel 5.4 - Use version `^1.0`
+* Laravel 5.3 - Use version `^0.1`
+
 ## Setup
 
 * Add `MikeMcLin\Passport\CustomRequestGrantProvider` to your list of providers **after** `Laravel\Passport\PassportServiceProvider`.
