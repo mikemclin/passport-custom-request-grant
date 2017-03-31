@@ -1,5 +1,5 @@
 {
-    "name": "mikemclin/passport-custom-request-grant",
+    "name": "jmancusi/passport-custom-request-grant",
     "description": "Custom Request Grant for Laravel Passport",
     "license": "MIT",
     "keywords": ["laravel", "lumen", "passport", "oauth", "grant"],
