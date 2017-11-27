@@ -23,6 +23,7 @@ class CustomRequestGrantProvider extends PassportServiceProvider
      */
     public function boot()
     {
+        app(AuthorizationServer::class)->enableGrantType($this->makeCustomRequestGrant(), Passport::tokensExpireIn());
     }
 
     /**
@@ -32,7 +33,6 @@ class CustomRequestGrantProvider extends PassportServiceProvider
      */
     public function register()
     {
-        app(AuthorizationServer::class)->enableGrantType($this->makeCustomRequestGrant(), Passport::tokensExpireIn());
     }
 
     /**
